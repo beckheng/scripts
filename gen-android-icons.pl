@@ -8,7 +8,7 @@ use strict;
 
 my $iconName = shift @ARGV || 'ic_launcher';
 
-foreach my $size (qw(28 29 32 40 48 50 57 58 72 75 76 80 90 96 100 108 114 120 136 144 152 192 512))
+foreach my $size (qw(16 28 29 32 40 48 50 57 58 72 75 76 80 90 96 100 108 114 120 136 144 152 192 512))
 {
 	system("convert -resize \"$size\" $iconName-1024.png $iconName-$size.png");
 
