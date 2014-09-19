@@ -4,7 +4,7 @@
 # 此脚本需要在drupal_site_path对应的目录下执行，不然IPC通信结果不正确
 # usage: 
 # 1. cd the_drupal_site_path
-# 2. perl $0 drupal_site_path
+# 2. perl $0 path1 path2 path..n
 
 use strict;
 
@@ -13,11 +13,11 @@ use IPC::Open3;
 
 sub usage
 {
-	die "perl $0 drush_site_path\n";
+	die "perl $0 path1 path2 path..n\n";
 }
 
-my $site_path = shift @ARGV;
-if (!$site_path)
+my @site_path = @ARGV;
+if (!@site_path)
 {
 	&usage();
 }
@@ -25,12 +25,12 @@ if (!$site_path)
 local(*CIN, *COUT, *CERR);
 
 my $watcher = File::ChangeNotify->instantiate_watcher(
-	directories => $site_path,
+	directories => [@site_path],
 	filter => qr/\.(?:module|inc)$/,
 	sleep_interval => 1,
 );
 
-print "monitor $site_path, wait for events\n\n";
+print "monitor @site_path, wait for events\n\n";
 
 while (my @events = $watcher->wait_for_events())
 {
