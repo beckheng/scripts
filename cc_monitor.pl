@@ -26,7 +26,7 @@ local(*CIN, *COUT, *CERR);
 
 my $watcher = File::ChangeNotify->instantiate_watcher(
 	directories => [@site_path],
-	filter => qr/\.(?:module|inc)$/,
+	filter => qr/\.(?:module|inc|info)$/,
 	sleep_interval => 1,
 );
 
