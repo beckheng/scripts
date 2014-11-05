@@ -23,7 +23,7 @@ if (!@site_path)
 
 my $watcher = File::ChangeNotify->instantiate_watcher(
 	directories => [@site_path],
-	filter => qr/\.(?:module|inc|info)$/,
+	filter => qr/\.(?:module|inc|info|php)$/,
 	sleep_interval => 1,
 );
 
