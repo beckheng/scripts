@@ -80,11 +80,11 @@ if ($dh = opendir($dir))
 $totals = 0;
 $sort_col = 'mu';
 
-$output_format = "%4s	%8s	%8s	%8s	%s %s\n";
+$output_format = "%4s	%8s	%8s	%8s	%13s	%s %s\n";
 
 printf($output_format, 'ct', 'cpu', 'mu', 'pmu', 
 	/*'excl_cpu', 'excl_mu', 'excl_pmu',*/ 
-	'url', 'fn');
+	'run_id', 'url', 'fn');
 
 foreach ($files as $file)
 {
@@ -113,6 +113,7 @@ foreach ($files as $file)
 				//$data['excl_cpu'],
 				//$data['excl_mu'],
 				//$data['excl_pmu'],
+				$file['run_id'],
 				$data['url'],
 				$data['fn']
 		);
