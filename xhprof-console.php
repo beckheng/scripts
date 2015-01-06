@@ -42,10 +42,21 @@ if ($dh = opendir($dir))
 		$run_id = substr($file, 0, $dot_pos);
 		$type = substr($file, $dot_pos+1);
 		
+		$app = 'N/A';
+		$url = $type;
+		
+		$dot_pos = strpos($type, '.');
+		if (FALSE !== $dot_pos)
+		{
+			// Has App Info
+			$app = substr($type, 0, $dot_pos);
+			$url = substr($type, $dot_pos+1);
+		}
+		
 		if ('urlencode' === $options['t'])
 		{
 			//$url = base64_decode($type);
-			$url = urldecode($type);
+			$url = urldecode($url);
 		}
 		else 
 		{
@@ -71,6 +82,7 @@ if ($dh = opendir($dir))
 		$files[] = array(
 			'run_id'=>$run_id,
 			'type'=>$type,
+			'app'=>$app,
 			'url'=>$url,
 		);
 	}
@@ -80,11 +92,11 @@ if ($dh = opendir($dir))
 $totals = 0;
 $sort_col = 'mu';
 
-$output_format = "%4s	%8s	%8s	%8s	%13s	%s %s\n";
+$output_format = "%4s	%8s	%8s	%8s	%13s	%10s	%s %s\n";
 
 printf($output_format, 'ct', 'cpu', 'mu', 'pmu', 
 	/*'excl_cpu', 'excl_mu', 'excl_pmu',*/ 
-	'run_id', 'url', 'fn');
+	'run_id', 'app', 'url', 'fn');
 
 foreach ($files as $file)
 {
@@ -114,6 +126,7 @@ foreach ($files as $file)
 				//$data['excl_mu'],
 				//$data['excl_pmu'],
 				$file['run_id'],
+				$file['app'],
 				$data['url'],
 				$data['fn']
 		);
