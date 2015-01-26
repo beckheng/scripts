@@ -1,0 +1,3 @@
+#!bash
+
+vagrant reload --provision
