@@ -100,6 +100,8 @@ if (open(HOST, $sysHostsFile))
 	{
 		print WRITE $content;
 		close(WRITE);
+
+		print "update hosts ok\n";
 	}
 	else
 	{
