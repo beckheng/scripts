@@ -3,6 +3,9 @@
 use strict;
 
 # read hosts from file and update /etc/hosts
+### file.hosts format
+# ip hostname1 hostname2
+###
 
 if (@ARGV != 1)
 {
